@@ -9,7 +9,7 @@ export interface Movie {
 export interface MoviesState {
     data: Movie[];
     loading: boolean;
-    error?: string
+    error: string
 }
 
 export enum MoviesActionTypes {
