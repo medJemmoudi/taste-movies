@@ -1,7 +1,7 @@
 import { MoviesActionTypes, Movie } from './types';
 import { action } from 'typesafe-actions';
 
-export const fetchSimilarMovies = (title: string) => action(MoviesActionTypes.FETCH_SIMILAR_MOVIES);
+export const fetchSimilarMovies = (title: string) => action(MoviesActionTypes.FETCH_SIMILAR_MOVIES, title);
 
 export const fetchMoviesSucces = (data: Movie[]) => action(MoviesActionTypes.FETCH_MOVIES_SUCESS, data);
 
