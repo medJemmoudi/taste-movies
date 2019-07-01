@@ -1,25 +1,28 @@
 import React from 'react';
 import './App.scss';
-import { Container } from 'react-bootstrap';
 import TopBar from './components/TopBar';
-import SearchField from './components/SearchField';
-import MoviesList from './components/Movies/Listing';
 import { Provider } from 'react-redux';
 import { configureStore } from './configureStore';
 import { Store } from 'redux';
 import { ApplicationState } from './store';
+import { createBrowserHistory } from 'history';
+import { ConnectedRouter } from 'connected-react-router';
+import { Route } from 'react-router-dom';
+import Home from './pages/Home';
+import Details from './pages/Details';
 
 const App: React.FC = () => {
-  const store: Store<ApplicationState> = configureStore();
+  const history = createBrowserHistory();
+  const store: Store<ApplicationState> = configureStore(history);
   return (
     <Provider store={store}>
-      <div className="App">
-        <TopBar />
-        <Container>
-          <SearchField />
-          <MoviesList />
-        </Container>
-      </div>
+      <ConnectedRouter history={history}>
+        <div className="App">
+          <TopBar />
+          <Route path="/" exact component={Home} />
+          <Route path="/details/:movieName" component={Details} />
+        </div>
+      </ConnectedRouter>
     </Provider>
   );
 }

@@ -4,6 +4,8 @@ import { Card, Col, Row, Spinner, Badge } from 'react-bootstrap';
 import { Movie } from '../../../store/movies/types';
 import { fetchSimilarMovies } from '../../../store/movies/actions';
 import { ApplicationState } from '../../../store';
+import { Link } from 'react-router-dom';
+import _ from 'lodash';
 
 interface MoviesListProps {
     readonly data: Movie[];
@@ -27,7 +29,9 @@ class MoviesList extends React.Component<MoviesListProps> {
                 <Card style={{ marginBottom: 20 }}>
                     <Card.Img variant="top" src={e.poster} />
                     <Card.Body>
-                        <Card.Title>{e.title}</Card.Title>
+                        <Card.Title>
+                            <Link to={`/details/${_.kebabCase(e.title)}`}>{e.title}</Link>
+                        </Card.Title>
                         <Card.Subtitle>{e.year}</Card.Subtitle>
                         <Card.Text>
                             <Badge variant="danger">{e.likes}</Badge>

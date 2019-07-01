@@ -3,9 +3,11 @@ import { ApplicationState, getRootReducer } from "./store";
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import moviesSaga from "./store/movies/saga";
+import { History } from 'history';
+import { routerMiddleware } from 'connected-react-router';
 
 
-export const configureStore = (): Store<ApplicationState> => {
+export const configureStore = (history: History): Store<ApplicationState> => {
     let initialState: ApplicationState = {
         movies: {
             data: [],
@@ -15,10 +17,10 @@ export const configureStore = (): Store<ApplicationState> => {
     };
 
     const reduxSaga = createSagaMiddleware();
-    const middlewares = [logger, reduxSaga];
+    const middlewares = [logger, routerMiddleware(history), reduxSaga];
 
     const store =  createStore(
-        getRootReducer(),
+        getRootReducer(history),
         initialState,
         applyMiddleware(...middlewares)
     );
