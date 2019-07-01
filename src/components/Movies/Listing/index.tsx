@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import _ from 'lodash';
-import { Card, Button, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row, Spinner, Badge } from 'react-bootstrap';
 import { Movie } from '../../../store/movies/types';
 import { fetchSimilarMovies } from '../../../store/movies/actions';
 import { ApplicationState } from '../../../store';
@@ -14,24 +13,40 @@ interface MoviesListProps {
 }
 
 class MoviesList extends React.Component<MoviesListProps> {
+    showLoading = () => {
+        return (
+            <Spinner className="mx-auto" animation="border" role="status">
+                <span className="sr-only">Loading...</span>
+            </Spinner>
+        );
+    }
+
+    showMoviesList = () => {
+        const moviesList = this.props.data.map((e: Movie, i) => (
+            <Col key={i} xs={6} lg={3} className="movie-item">
+                <Card style={{ marginBottom: 20 }}>
+                    <Card.Img variant="top" src={e.poster} />
+                    <Card.Body>
+                        <Card.Title>{e.title}</Card.Title>
+                        <Card.Subtitle>{e.year}</Card.Subtitle>
+                        <Card.Text>
+                            <Badge variant="danger">{e.likes}</Badge>
+                            <Badge variant="warning">{e.rating}</Badge>
+                        </Card.Text>
+                    </Card.Body>
+                </Card>
+            </Col>
+        ));
+
+        return moviesList;
+    }
+
     render() {
+        
+
         return (
             <Row>
-                {(_.range(1, 12)).map((e, i) => (
-                    <Col key={i} xs={3}>
-                        <Card style={{ marginBottom: 20 }}>
-                            <Card.Img variant="top" src="https://picsum.photos/115" />
-                            <Card.Body>
-                                <Card.Title>Card Title</Card.Title>
-                                <Card.Text>
-                                    Some quick example text to build on the card title and make up the bulk of
-                                    the card's content.
-                                </Card.Text>
-                                <Button variant="primary">Go somewhere</Button>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                ))}
+                {this.props.loading ? this.showLoading() : this.showMoviesList()}
             </Row>
         )
     }
