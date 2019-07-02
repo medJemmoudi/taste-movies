@@ -1,11 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Col, Row, Spinner, Badge } from 'react-bootstrap';
+import { Card, Col, Row, Badge } from 'react-bootstrap';
 import { Movie } from '../../../store/movies/types';
 import { fetchSimilarMovies } from '../../../store/movies/actions';
 import { ApplicationState } from '../../../store';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
+import Loading from '../../Common/Loading';
 
 interface MoviesListProps {
     readonly data: Movie[];
@@ -15,14 +16,6 @@ interface MoviesListProps {
 }
 
 class MoviesList extends React.Component<MoviesListProps> {
-    showLoading = () => {
-        return (
-            <Spinner className="mx-auto" animation="border" role="status">
-                <span className="sr-only">Loading...</span>
-            </Spinner>
-        );
-    }
-
     showMoviesList = () => {
         const moviesList = this.props.data.map((e: Movie, i) => (
             <Col key={i} xs={6} lg={3} className="movie-item">
@@ -48,7 +41,7 @@ class MoviesList extends React.Component<MoviesListProps> {
     render() {
         return (
             <Row>
-                {this.props.loading ? this.showLoading() : this.showMoviesList()}
+                {this.props.loading ? <Loading /> : this.showMoviesList()}
             </Row>
         )
     }
