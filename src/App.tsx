@@ -11,7 +11,7 @@ import { Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Details from './pages/Details';
 
-const App: React.FC = () => {
+const App: React.SFC = () => {
   const history = createBrowserHistory();
   const store: Store<ApplicationState> = configureStore(history);
   return (

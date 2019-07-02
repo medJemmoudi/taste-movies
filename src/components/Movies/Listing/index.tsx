@@ -46,8 +46,6 @@ class MoviesList extends React.Component<MoviesListProps> {
     }
 
     render() {
-        
-
         return (
             <Row>
                 {this.props.loading ? this.showLoading() : this.showMoviesList()}
