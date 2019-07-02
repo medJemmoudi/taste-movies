@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { MovieDetailsState } from '../../../store/details/types';
+import { MovieDetailsState, Comment } from '../../../store/details/types';
 import { ApplicationState } from '../../../store';
 import { fetchMovieDetails } from '../../../store/details/actions';
 import { connect } from 'react-redux';
-import { Row, Col, Image } from 'react-bootstrap';
+import { Row, Col, Image, Card, CardColumns } from 'react-bootstrap';
 import Loading from '../../Common/Loading';
 import _ from 'lodash';
 
@@ -41,6 +41,18 @@ class ShowMovieDetails extends Component<IShowMovieDetailsProps> {
                         <li><strong>Studio:</strong> { details.studio }</li>
                         <li><strong>Box office:</strong> { details.box_office }</li>
                     </ul>
+                </Col>
+                <Col xs={12}>
+                    <CardColumns>
+                        {details.comments.map((c: Comment) => (
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title>{ c.author }</Card.Title>
+                                    <Card.Text>{ c.message }</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        ))}
+                    </CardColumns>
                 </Col>
             </>
         );
