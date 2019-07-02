@@ -1,5 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
+import { Container } from 'react-bootstrap';
+import ShowMovieDetails from '../components/Movies/Details';
 
 interface IDetailsParams {
     movieName: string;
@@ -7,7 +9,9 @@ interface IDetailsParams {
 
 function Details ({ match }: RouteComponentProps<IDetailsParams>) {
     return (
-        <p>{`The movie you're looking for is: ${match.params.movieName}`}</p>
+        <Container>
+            <ShowMovieDetails title={match.params.movieName} />
+        </Container>
     );
 }
 
