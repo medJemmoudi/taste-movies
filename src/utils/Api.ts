@@ -53,6 +53,7 @@ export const getMovieDetails = async (movieTitle: string) => {
 
     const results: MovieDetails = {
         synopsis: $('#movieSynopsis').text().trim(),
+        poster: $('.movie-thumbnail-wrap img.posterImage').attr('data-src'),
         comments: [],
     };
 

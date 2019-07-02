@@ -15,6 +15,7 @@ export interface MovieDetails {
     box_office?: string;
     runtime?: string;
     studio?: string;
+    poster?: string;
 }
 
 export enum MovieDetailsActionTypes {
