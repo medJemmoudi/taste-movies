@@ -7,13 +7,13 @@ function* handleFetchMovieDetails(action: ReturnType<typeof fetchMovieDetails>) 
     try {
         let res = yield call(getMovieDetails, action.payload);
         if (res.error) {
-            put(fetchMovieDetailsFailed(res.error));
+            yield put(fetchMovieDetailsFailed(res.error));
         } else {
-            put(fetchMovieDetailsSuccess(res));
+            yield put(fetchMovieDetailsSuccess(res));
         }
     } catch(e) {
         console.log(e);
-        put(fetchMovieDetailsFailed(e));
+        yield put(fetchMovieDetailsFailed(e));
     }
 }
 
