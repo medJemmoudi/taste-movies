@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Card, Col, Row, Badge, CardColumns } from 'react-bootstrap';
+import { Card, Col, Row, Badge } from 'react-bootstrap';
 import { Movie } from '../../../store/movies/types';
 import { fetchSimilarMovies } from '../../../store/movies/actions';
 import { ApplicationState } from '../../../store';
