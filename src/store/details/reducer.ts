@@ -1,5 +1,6 @@
-import { Reducer } from "redux";
+import { Reducer, AnyAction } from "redux";
 import { MovieDetailsState, MovieDetailsActionTypes } from "./types";
+import { createReducer } from "../../utils/sauce";
 
 const initialState: MovieDetailsState = {
     details: {
@@ -10,17 +11,24 @@ const initialState: MovieDetailsState = {
     errors: ""
 }
 
-const reducer: Reducer<MovieDetailsState> = (state = initialState, action) => {
-    switch (action.type) {
-        case MovieDetailsActionTypes.FETCH_MOVIE_DETAILS:
-            return { ...state, loading: true };
-        case MovieDetailsActionTypes.FETCH_MOVIE_DETAILS_SUCCESS:
-            return { ...state, loading: false, details: action.payload };
-        case MovieDetailsActionTypes.FETCH_MOVIE_DETAILS_FAILED:
-            return { ...state, loading: false, errors: action.payload };
-        default:
-            return state;
-    }
+const fetchDetails = (state = initialState, action: AnyAction) => {
+    return {...state, loading: true};
 }
+
+const fetchSuccess = (state = initialState, action: AnyAction) => {
+    return { ...state, loading: false, details: action.payload };
+}
+
+const fetchFailed = (state = initialState, action: AnyAction) => {
+    return { ...state, loading: false, errors: action.payload };
+}
+
+const HANDLERS = {
+    [MovieDetailsActionTypes.FETCH_MOVIE_DETAILS]: fetchDetails,
+    [MovieDetailsActionTypes.FETCH_MOVIE_DETAILS_SUCCESS]: fetchSuccess,
+    [MovieDetailsActionTypes.FETCH_MOVIE_DETAILS_FAILED]: fetchFailed,
+}
+
+const reducer: Reducer<MovieDetailsState> = createReducer(initialState, HANDLERS);
 
 export { reducer as MovieDetailsReducer };

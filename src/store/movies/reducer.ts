@@ -1,5 +1,6 @@
-import { Reducer } from "redux";
+import { Reducer, AnyAction } from "redux";
 import { MoviesState, MoviesActionTypes } from "./types";
+import { createReducer } from "../../utils/sauce";
 
 const initialState: MoviesState = {
     loading: false,
@@ -7,17 +8,24 @@ const initialState: MoviesState = {
     error: ''
 }
 
-const reducer: Reducer<MoviesState> = (state = initialState, action) => {
-    switch(action.type) {
-        case MoviesActionTypes.FETCH_SIMILAR_MOVIES: 
-            return { ...state, loading: true };
-        case MoviesActionTypes.FETCH_MOVIES_SUCESS:
-            return { ...state, loading: false, data: action.payload };
-        case MoviesActionTypes.FETCH_MOVIES_FAILED:
-            return { ...state, loading: false, error: action.payload };
-        default:
-            return state;
-    }
+const beginFetch = (state = initialState, action: AnyAction) => {
+    return { ...state, loading: true };
 }
+
+const success = (state = initialState, action: AnyAction) => {
+    return { ...state, loading: false, data: action.payload };
+}
+
+const failure = (state = initialState, action: AnyAction) => {
+    return { ...state, loading: false, error: action.payload };
+}
+
+const HANDLERS = {
+    [MoviesActionTypes.FETCH_SIMILAR_MOVIES]: beginFetch,
+    [MoviesActionTypes.FETCH_MOVIES_SUCESS]: success,
+    [MoviesActionTypes.FETCH_MOVIES_FAILED]: failure,
+}
+
+const reducer: Reducer<MoviesState> = createReducer(initialState, HANDLERS);
 
 export {reducer as MoviesReducer};
