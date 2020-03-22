@@ -1,5 +1,5 @@
 import React from 'react';
-import './App.scss';
+import './App.css';
 import TopBar from './components/TopBar';
 import { Provider } from 'react-redux';
 import { configureStore } from './configureStore';
@@ -7,9 +7,8 @@ import { Store } from 'redux';
 import { ApplicationState } from './store';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
-import { Route } from 'react-router-dom';
-import Home from './pages/Home';
-import Details from './pages/Details';
+import { Routes } from './Routes';
+
 
 const App: React.SFC = () => {
   const history = createBrowserHistory();
@@ -17,10 +16,9 @@ const App: React.SFC = () => {
   return (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <div className="App">
+        <div>
           <TopBar />
-          <Route path="/" exact component={Home} />
-          <Route path="/details/:movieName" component={Details} />
+          <Routes />
         </div>
       </ConnectedRouter>
     </Provider>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from "react-bootstrap";
-import SearchField from "../components/SearchField";
-import MoviesList from "../components/Movies/Listing";
+import SearchField from './SearchField';
+import MoviesList from './MoviesList';
 
 const Home: React.SFC = () => (
     <Container>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col, Jumbotron, Form, Button } from 'react-bootstrap';
-import { fetchSimilarMovies } from '../../store/movies/actions';
-import { ApplicationState } from '../../store';
+import { fetchSimilarMovies } from '../../../store/movies/actions';
+import { ApplicationState } from '../../../store';
 import { connect } from 'react-redux';
 import _ from 'lodash';
 

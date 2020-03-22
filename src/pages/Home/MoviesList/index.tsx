@@ -6,7 +6,7 @@ import { fetchSimilarMovies } from '../../../store/movies/actions';
 import { ApplicationState } from '../../../store';
 import { Link } from 'react-router-dom';
 import _ from 'lodash';
-import Loading from '../../Common/Loading';
+import Loading from '../../../components/Common/Loading';
 
 interface MoviesListProps {
     readonly data: Movie[];

@@ -1,7 +1,7 @@
 import { call, put, takeEvery, all, fork } from 'redux-saga/effects';
-import { getSimilarMovies } from '../../utils/Api';
 import { fetchMoviesFailed, fetchMoviesSucces, fetchSimilarMovies } from './actions';
 import { MoviesActionTypes } from './types';
+import { getSimilarMovies } from './service';
 
 function* handleFetchSimilarMovies(action: ReturnType<typeof fetchSimilarMovies>) {
     try {
